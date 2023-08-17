@@ -6,7 +6,7 @@ Use MysqlStore to save your WhatsApp MultiDevice session on a MySQL Database.
 ## Quick Links
 
 * [Guide / Getting Started](https://wwebjs.dev/guide/authentication.html)
-* [GitHub](https://github.com/paullv/wwebjs-mysql)
+* [GitHub](https://github.com/paulvl/wwebjs-mysql)
 * [npm](https://www.npmjs.com/package/wwebjs-mysql)
 
 ## Installation

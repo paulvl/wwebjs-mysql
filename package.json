@@ -1,6 +1,6 @@
 {
     "name": "wwebjs-mysql",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A MySQL plugin for whatsapp-web.js library",
     "main": "index.js",
     "scripts": {
