@@ -16,12 +16,15 @@ The module is now available on npm! `npm i wwebjs-mysql`
 ## Example MySQL Table statement
 
 ```sql
-CREATE TABLE `sessions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `session_name` varchar(255) DEFAULT NULL,
+CREATE TABLE `wsp_sessions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `session_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data` mediumblob,
-  PRIMARY KEY (`id`)
-)
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `wsp_sessions_session_name_unique` (`session_name`)
+) 
 ```
 
 ## Example usage
@@ -42,9 +45,10 @@ const pool = mysql.createPool({
 });
 
 const tableInfo = {
-    table: 'sessions',
+    table: 'wsp_sessions',
     session_column: 'session_name',
-    data_column: 'data'
+    data_column: 'data',
+    updated_at_column: 'updated_at'
 }
 
 const store = new MysqlStore({ pool: pool, tableInfo: tableInfo })
