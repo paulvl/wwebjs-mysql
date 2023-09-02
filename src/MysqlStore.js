@@ -10,7 +10,7 @@ class MysqlStore {
 
     async sessionExists(options) {
         const connection = await this.pool.getConnection();
-        const [rows] = await connection.execute( `SELECT COUNT(*) as count FROM \`${this.tableInfo.table}\` WHERE \`${this.tableInfo.session_column}\` = ?`, [options.session]);
+        const [rows] = await connection.execute( `SELECT COUNT(\`${this.tableInfo.session_column}\`) as count FROM \`${this.tableInfo.table}\` WHERE \`${this.tableInfo.session_column}\` = ?`, [options.session]);
         connection.release();
         return rows[0].count > 0;
     }
@@ -18,7 +18,7 @@ class MysqlStore {
     async save(options) {
         const connection = await this.pool.getConnection();
         const fileBuffer = fs.readFileSync(`${options.session}.zip`);
-        const [rows] = await connection.execute( `SELECT  as count FROM \`${this.tableInfo.table}\` WHERE \`${this.tableInfo.session_column}\` = ?`, [options.session]);
+        const [rows] = await connection.execute( `SELECT COUNT(\`${this.tableInfo.session_column}\`)  as count FROM \`${this.tableInfo.table}\` WHERE \`${this.tableInfo.session_column}\` = ?`, [options.session]);
         if (rows[0].count == 0) {
             await connection.execute(`INSERT INTO \`${this.tableInfo.table}\` (\`${this.tableInfo.session_column}\`, \`${this.tableInfo.data_column}\`) VALUES (?, ?)`, [options.session, fileBuffer]);
         } else {
